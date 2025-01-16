@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inspect Element CTF Challenge</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    #message {
+      margin-top: 20px;
+      font-size: 1.2em;
+      font-weight: bold;
+      color: red;
+    }
+
+    .hint {
+      font-size: 0.9em;
+      color: gray;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>CTF Challenge: Inspect and Modify</h1>
+  <p>Your task: Modify the page using Inspect Element to unlock the flag!</p>
+
+  <div>
+    <label>
+      <input type="checkbox" id="checkbox"> Click me to reveal the flag
+    </label>
+    <p class="hint">(Hint: Modify attributes for the checkbox and the hidden input below!)</p>
+  </div>
+
+  <input type="hidden" id="hidden-input" value="false">
+
+  <div id="message"></div>
+
+  <script>
+    const checkbox = document.getElementById('checkbox');
+    const hiddenInput = document.getElementById('hidden-input');
+    const message = document.getElementById('message');
+
+    checkbox.addEventListener('change', () => {
+      if (checkbox.checked) {
+        // Check if the required modifications are done
+        const checkboxModified = checkbox.getAttribute('data-modified') === 'true';
+        const hiddenInputModified = hiddenInput.value === 'true';
+
+        if (checkboxModified && hiddenInputModified) {
+          // Display the flag if both modifications are correct
+          message.style.color = 'green';
+          message.textContent = 'Flag: CTF{Inspect_Element_Double_Success}';
+        } else {
+          // Display error message if modifications are incomplete
+          message.style.color = 'red';
+          message.textContent = 'Error: You need to modify both elements to unlock the flag!';
+        }
+      } else {
+        message.textContent = ''; // Clear the message when unchecked
+      }
+    });
+  </script>
+</body>
+</html>
