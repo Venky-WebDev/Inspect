@@ -1,74 +1,101 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inspect Element CTF Challenge</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin-top: 50px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
-    h1 {
-      color: #333;
-    }
+        .form-container {
+            background-color: #fff;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
 
-    #message {
-      margin-top: 20px;
-      font-size: 1.2em;
-      font-weight: bold;
-      color: red;
-    }
+        .form-container h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
 
-    .hint {
-      font-size: 0.9em;
-      color: gray;
-      margin-top: 10px;
-    }
-  </style>
+        .form-container label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .form-container input, .form-container textarea, .form-container select, .form-container button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-container input:focus, .form-container textarea:focus, .form-container select:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        .form-container button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .form-container .note {
+            font-size: 14px;
+            color: #777;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-  <h1>CTF Challenge: Inspect and Modify</h1>
-  <p>Your task: Modify the page using Inspect Element to unlock the flag!</p>
+    <div class="form-container">
+        <h2>Contact Us</h2>
+        <form action="#" method="post">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required>
 
-  <div>
-    <label>
-      <input type="checkbox" id="checkbox"> Click me to reveal the flag
-    </label>
-    <p class="hint">(Hint: Modify attributes for the checkbox and the hidden input below!)</p>
-  </div>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
 
-  <input type="hidden" id="hidden-input" value="false">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="4" placeholder="Your message here" required></textarea>
 
-  <div id="message"></div>
+            <label for="subject">Subject</label>
+            <select id="subject" name="subject">
+                <option value="general">General Inquiry</option>
+                <option value="support">Support</option>
+                <option value="feedback">Feedback</option>
+            </select>
 
-  <script>
-    const checkbox = document.getElementById('checkbox');
-    const hiddenInput = document.getElementById('hidden-input');
-    const message = document.getElementById('message');
-
-    checkbox.addEventListener('change', () => {
-      if (checkbox.checked) {
-        // Check if the required modifications are done
-        const checkboxModified = checkbox.getAttribute('data-modified') === 'true';
-        const hiddenInputModified = hiddenInput.value === 'true';
-
-        if (checkboxModified && hiddenInputModified) {
-          // Display the flag if both modifications are correct
-          message.style.color = 'green';
-          message.textContent = 'Flag: CTF{Inspect_Element_Double_Success}';
-        } else {
-          // Display error message if modifications are incomplete
-          message.style.color = 'red';
-          message.textContent = 'Error: You need to modify both elements to unlock the flag!';
-        }
-      } else {
-        message.textContent = ''; // Clear the message when unchecked
-      }
-    });
-  </script>
+            <button type="submit">Submit</button>
+        </form>
+        <p class="note">We will get back to you within 24 hours.</p>
+    </div>
 </body>
 </html>
